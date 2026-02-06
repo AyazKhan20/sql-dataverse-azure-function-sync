@@ -1,11 +1,72 @@
-# TimerTrigger - C<span>#</span>
+#  SQL Server → Dataverse Sync using Azure Functions
 
-The `TimerTrigger` makes it incredibly easy to have your functions executed on a schedule. This sample demonstrates a simple use case of calling your function every 5 minutes.
+##  Project Overview
+This project implements an automated and scheduled data synchronization system that transfers changes from SQL Server to Microsoft Dataverse (Dynamics 365) using Azure Functions and Power Automate.
 
-## How it works
+The system detects INSERT, UPDATE, and DELETE operations in SQL Server and reflects them in Dataverse without manual intervention.
 
-For a `TimerTrigger` to work, you provide a schedule in the form of a [cron expression](https://en.wikipedia.org/wiki/Cron#CRON_expression)(See the link for full details). A cron expression is a string with 6 separate expressions which represent a given schedule via patterns. The pattern we use to represent every 5 minutes is `0 */5 * * * *`. This, in plain text, means: "When seconds is equal to 0, minutes is divisible by 5, for any hour, day of the month, month, day of the week, or year".
+---
 
-## Learn more
+##  Objective
+✔ Monitor SQL Server changes  
+✔ Trigger Azure Function on schedule  
+✔ Send changed records as JSON  
+✔ Automatically update Dataverse  
+✔ Avoid duplicate sync  
+✔ Enterprise-ready solution  
 
-<TODO> Documentation
+---
+
+##  Architecture
+
+SQL Server  
+   ↓ (Change Tracking)  
+Azure Function (Timer Trigger)  
+   ↓ (HTTP POST JSON)  
+Power Automate Flow  
+   ↓  
+Dataverse (D365)
+
+---
+
+##  Tech Stack
+
+| Component | Technology |
+|-----------|-----------|
+| Backend | Azure Functions (.NET 8 C#) |
+| Database | SQL Server / Azure SQL |
+| Change Detection | SQL Change Tracking |
+| Integration | Power Automate |
+| Target | Microsoft Dataverse (D365) |
+| IDE | Visual Studio 2022 |
+| Version Control | Git + GitHub |
+
+---
+
+##  How It Works
+
+### Step 1
+Azure Function runs every 60 seconds (Timer Trigger)
+
+### Step 2
+SQL Change Tracking fetches only modified rows
+
+### Step 3
+Function converts rows → JSON
+
+### Step 4
+HTTP POST sent to Power Automate
+
+### Step 5
+Flow inserts/updates/deletes records in Dataverse
+
+---
+
+
+================= Author ==================
+
+Ayazkhan Pathan
+
+GitHub: https://github.com/AyazKhan20
+
+LinkedIn: https://www.linkedin.com/in/ayazkhan-pathan-43302b357/
